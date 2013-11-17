@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.xml" />
     <Content Include="content\aboutUs.aspx" />
     <Content Include="content\earthtainers.aspx" />
     <Content Include="Global.asax" />
@@ -69,6 +70,7 @@
     <None Include="scripts\jquery-2.0.3.intellisense.js" />
     <Content Include="content\nav.aspx" />
     <Content Include="content\recipes.aspx" />
+    <Content Include="index.html" />
     <Content Include="members\myGarden.aspx" />
     <Content Include="scripts\common.js" />
     <Content Include="scripts\jquery.js" />
