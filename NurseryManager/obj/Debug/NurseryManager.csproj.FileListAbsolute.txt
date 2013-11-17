@@ -1,0 +1,5 @@
+C:\Users\snoa\Documents\IUPUI\CSCI 495\NurseryManager\NurseryManager\bin\NurseryManager.dll
+C:\Users\snoa\Documents\IUPUI\CSCI 495\NurseryManager\NurseryManager\bin\NurseryManager.pdb
+C:\Users\snoa\Documents\IUPUI\CSCI 495\NurseryManager\NurseryManager\obj\Debug\NurseryManager.csprojResolveAssemblyReference.cache
+C:\Users\snoa\Documents\IUPUI\CSCI 495\NurseryManager\NurseryManager\obj\Debug\NurseryManager.dll
+C:\Users\snoa\Documents\IUPUI\CSCI 495\NurseryManager\NurseryManager\obj\Debug\NurseryManager.pdb
