@@ -59,7 +59,6 @@
   <ItemGroup>
     <Content Include="config.xml" />
     <Content Include="content\aboutUs.aspx" />
-    <Content Include="content\earthtainers.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\greenFaux.jpg" />
     <Content Include="images\kidTomatoes.jpg" />
@@ -78,9 +77,6 @@
     <Content Include="styles\main.css" />
     <Content Include="styles\main_narrow.css" />
     <Content Include="content\varieties.aspx" />
-    <Content Include="videos\earthtainer.mp4" />
-    <Content Include="videos\earthtainer.mpg" />
-    <Content Include="videos\earthtainer.wmv" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -98,8 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\jquery-2.0.3.min.map" />
-    <Content Include="videos\earthtainer.ogg" />
-    <Content Include="videos\earthtainer.ogv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
