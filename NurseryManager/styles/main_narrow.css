@@ -60,15 +60,15 @@
 
     #loginArea {
         width: auto;
-        float:none;
-        margin-top:0px;
+        float: none;
+        margin-top: 0px;
         margin-left: auto;
         margin-right: auto;
     }
 
     #lLogin {
         display: block;
-        float: initial;        
+        float: initial;
         font-family: 'Open Sans Condensed', sans-serif;
         line-height: 2em;
         text-align: center;
@@ -214,5 +214,16 @@
         section p img {
             float: none;
             width: 100%;
+        }
+
+    .multi_col {
+        float: left;
+        width: 33%;
+        height: 26px;
+    }
+
+        .multi_col input, select {
+            margin-right: 5px;
+            width: 55%;
         }
 }
