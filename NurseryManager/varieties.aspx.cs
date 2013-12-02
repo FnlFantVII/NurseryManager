@@ -6,13 +6,13 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-namespace NurseryManager
+namespace NurseryManager.content
 {
-    public partial class _default : System.Web.UI.Page
+    public partial class varieties : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((HtmlGenericControl)Master.FindControl("menuHome")).Attributes.Add("Class", "current_page_item");
+            ((HtmlGenericControl)Master.FindControl("menuVarieties")).Attributes.Add("Class", "current_page_item");
         }
     }
 }

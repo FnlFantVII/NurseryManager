@@ -1,5 +1,7 @@
-<!-- Content -->
-<div id="Content">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/main.Master" AutoEventWireup="true" CodeBehind="aboutUs.aspx.cs" Inherits="NurseryManager.content.aboutUs" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="cphMain" runat="server">
     <h1>About Us</h1>
     <section>
         <h2>About the Founder</h2>
@@ -14,4 +16,4 @@
                 We are one big happy tomato family!
         </p>
     </section>
-</div>
+</asp:Content>

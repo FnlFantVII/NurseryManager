@@ -1,0 +1,68 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="admin.master.cs" Inherits="NurseryManager.admin.admin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>My Tomato Garden - Administration</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=false;" />
+    <link rel="stylesheet" href="../styles/main.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/main_narrow.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(init);
+
+        function init() {
+            $('#menuIcon').click(toggleMenu);
+        };
+
+        function toggleMenu() {
+            if ($('nav').hasClass('closed')) {
+                $('nav').toggleClass('closed');
+                $('nav').slideDown("medium");
+            } else {
+                $('nav').slideUp("medium");
+                $('nav').toggleClass('closed');
+            }
+        };
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="mainForm" runat="server">
+        <asp:ScriptManager ID="sm1" runat="server" EnablePageMethods="true">
+            <Scripts>
+                <asp:ScriptReference Name="jquery" />
+            </Scripts>
+        </asp:ScriptManager>
+        <div id="headerWrapper">
+            <header>
+                <div id="menuIcon" class="hidden"></div>
+                <img src="../images/logo.jpg" />
+                <nav>
+                    <ul>
+                        <li><a href="../default.aspx">Home</a></li>
+                        <li><a href="batches.aspx">Batches</a></li>
+                        <li><a href="varieties.aspx">Varieties</a></li>
+                        <li><a href="orders.aspx">Orders</a></li>
+                        <li><a href="customers.aspx">Customers</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <div id="headerBottom">
+            </div>
+        </div>
+        <!-- Content -->
+        <div id="Container">
+            <div id="Content">
+                <asp:ContentPlaceHolder ID="cphMain" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

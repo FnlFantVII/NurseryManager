@@ -57,8 +57,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="config.xml" />
-    <Content Include="content\aboutUs.aspx" />
+    <Content Include="admin\batches.aspx" />
+    <Content Include="admin\Varieties.aspx" />
+    <Content Include="config.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="aboutUs.aspx" />
+    <Content Include="images\x_red.jpg" />
+    <Content Include="recipes.aspx" />
+    <Content Include="varieties.aspx" />
+    <Content Include="default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="images\greenFaux.jpg" />
     <Content Include="images\icons\tree_48.png" />
@@ -69,10 +77,9 @@
     <Content Include="images\logo.jpg" />
     <Content Include="images\menu.png" />
     <Content Include="images\navArrow.png" />
-    <Content Include="default.aspx" />
+    <Content Include="admin\admin.Master" />
+    <Content Include="main.Master" />
     <None Include="scripts\jquery-2.0.3.intellisense.js" />
-    <Content Include="content\nav.aspx" />
-    <Content Include="content\recipes.aspx" />
     <Content Include="index.html" />
     <Content Include="members\myGarden.aspx" />
     <Content Include="scripts\common.js" />
@@ -80,12 +87,50 @@
     <Content Include="scripts\jquery.min.js" />
     <Content Include="styles\main.css" />
     <Content Include="styles\main_narrow.css" />
-    <Content Include="content\varieties.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
+    <Compile Include="admin\admin.Master.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\admin.Master.designer.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\batches.aspx.cs">
+      <DependentUpon>batches.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\batches.aspx.designer.cs">
+      <DependentUpon>batches.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="aboutUs.aspx.cs">
+      <DependentUpon>aboutUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="aboutUs.aspx.designer.cs">
+      <DependentUpon>aboutUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Varieties.aspx.cs">
+      <DependentUpon>Varieties.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Varieties.aspx.designer.cs">
+      <DependentUpon>Varieties.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="recipes.aspx.cs">
+      <DependentUpon>recipes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="recipes.aspx.designer.cs">
+      <DependentUpon>recipes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="varieties.aspx.cs">
+      <DependentUpon>varieties.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="varieties.aspx.designer.cs">
+      <DependentUpon>varieties.aspx</DependentUpon>
     </Compile>
     <Compile Include="default.aspx.cs">
       <DependentUpon>default.aspx</DependentUpon>
@@ -93,6 +138,16 @@
     </Compile>
     <Compile Include="default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="main.Master.cs">
+      <DependentUpon>main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="main.Master.designer.cs">
+      <DependentUpon>main.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,9 +160,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="admin\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

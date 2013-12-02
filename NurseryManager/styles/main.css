@@ -127,6 +127,23 @@ nav {
     background-color: #E6DDBB;
 }
 
+#dSearchResults {
+    width:99%;
+    margin-top:5px;
+    margin-bottom:5px;
+    margin-left:auto;
+    margin-right:auto;
+    overflow:scroll;
+    border:solid Gray 1px;
+}
+
+#dSearchResults input[type=text] {
+    width:95%;
+}
+#dSearchResults span {
+    width:95%;
+}
+
 h1 {
     margin-left: 20px;
     color: white;
@@ -174,6 +191,40 @@ section {
     section p img {
         float: left;
         margin-right: 10px;
+    }
+
+.dButtonRow {
+    float:left;
+    width:100%;
+}
+.dButtonRow button {
+    float:right;
+    margin: 5px 20px 10px 0px;
+    width:75px;
+}
+
+.dButtonRow .left_align_button {
+    float:left;
+    margin-left:20px;
+}
+
+.multi_col {
+    float:left;
+    width:33%;
+    height:26px;
+}
+    .multi_col input, select {
+        margin-right: 5px;
+        width:55%;
+    }
+.sub_col_left {
+    float:left;
+    width:40%;
+}
+    .sub_col_left label, span {
+        float:right;
+        margin-right:5px;
+        margin-top:5px;
     }
 
 .hidden {
