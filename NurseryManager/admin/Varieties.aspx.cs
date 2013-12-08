@@ -23,76 +23,54 @@ namespace NurseryManager.admin
             dsVarieties.SelectParameters["MoistureId"].DefaultValue = cmbMoistureLevel.SelectedValue;
             dsVarieties.SelectParameters["ContainerId"].DefaultValue = cmbContainer.SelectedValue;
             dsVarieties.SelectParameters["HeatIndexId"].DefaultValue = cmbHeatIndex.SelectedValue;
-            var items = dsVarieties.Select(new DataSourceSelectArguments());
+            //var items = dsVarieties.Select(new DataSourceSelectArguments());
             gvResults.DataBind();
         }
 
-        protected void gvResults_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void btnNewDelete_ServerClick(object sender, EventArgs e)
         {
-
-        }
-
-        protected void btnClear_ServerClick(object sender, EventArgs e)
-        {
-            txtSearchName.Text = string.Empty;
-            cmbClimate.SelectedValue = "0";
-            cmbColor.SelectedValue = "0";
-            cmbContainer.SelectedValue = "0";
-            cmbHeatIndex.SelectedValue = "0";
-            cmbMoistureLevel.SelectedValue = "0";
-            cmbSize.SelectedValue = "0";
-            cmbSubType.SelectedValue = "0";
-            cmbType.SelectedValue = "0";
-        }
-
-        protected void btnNew_ServerClick(object sender, EventArgs e)
-        {
-            sManageVariety.Visible = false;
-            sNewVariety.Visible = true;
-            ResetNewVariety();
-        }
-
-        protected void btnNewCancel_ServerClick(object sender, EventArgs e)
-        {
-            sManageVariety.Visible = true;
-            sNewVariety.Visible = false;
+            dsVarieties.DeleteParameters["VarietyId"].DefaultValue = txtNewId.Value;
+            dsVarieties.Delete();
             gvResults.DataBind();
-        }
-
-        private void ResetNewVariety()
-        {
-            txtNewName.Text = string.Empty;
-            txtNewDescription.Text = string.Empty;
-            cmbNewClimate.SelectedValue = "0";
-            cmbNewColor.SelectedValue = "0";
-            cmbNewContainer.SelectedValue = "0";
-            cmbNewHeatIndex.SelectedValue = "0";
-            cmbNewMoistureLevel.SelectedValue = "0";
-            cmbNewSize.SelectedValue = "0";
-            cmbNewSubType.SelectedValue = "0";
         }
 
         protected void btnNewUpdate_ServerClick(object sender, EventArgs e)
         {
             try
             {
-                dsVarieties.InsertParameters["Name"].DefaultValue = txtNewName.Text;
-                dsVarieties.InsertParameters["Description"].DefaultValue = txtNewDescription.Text;
-                dsVarieties.InsertParameters["ColorId"].DefaultValue = cmbNewColor.SelectedValue;
-                dsVarieties.InsertParameters["SizeId"].DefaultValue = cmbNewSize.SelectedValue;
-                dsVarieties.InsertParameters["SubTypeId"].DefaultValue = cmbNewSubType.SelectedValue;
-                dsVarieties.InsertParameters["ClimateId"].DefaultValue = cmbNewClimate.SelectedValue;
-                dsVarieties.InsertParameters["MoistureId"].DefaultValue = cmbNewMoistureLevel.SelectedValue;
-                dsVarieties.InsertParameters["ContainerId"].DefaultValue = cmbNewContainer.SelectedValue;
-                dsVarieties.InsertParameters["HeatIndexId"].DefaultValue = cmbNewHeatIndex.SelectedValue;
-                dsVarieties.InsertParameters["IsDeterminate"].DefaultValue = chkNewIsDeterministic.Checked.ToString();
+                if (txtNewId.Value == "0")
+                {
+                    dsVarieties.InsertParameters["Name"].DefaultValue = txtNewName.Text;
+                    dsVarieties.InsertParameters["Description"].DefaultValue = txtNewDescription.Text;
+                    dsVarieties.InsertParameters["ColorId"].DefaultValue = cmbNewColor.SelectedValue;
+                    dsVarieties.InsertParameters["SizeId"].DefaultValue = cmbNewSize.SelectedValue;
+                    dsVarieties.InsertParameters["SubTypeId"].DefaultValue = cmbNewSubType.SelectedValue;
+                    dsVarieties.InsertParameters["ClimateId"].DefaultValue = cmbNewClimate.SelectedValue;
+                    dsVarieties.InsertParameters["MoistureId"].DefaultValue = cmbNewMoistureLevel.SelectedValue;
+                    dsVarieties.InsertParameters["ContainerId"].DefaultValue = cmbNewContainer.SelectedValue;
+                    dsVarieties.InsertParameters["HeatIndexId"].DefaultValue = cmbNewHeatIndex.SelectedValue;
+                    dsVarieties.InsertParameters["IsDeterminate"].DefaultValue = cmbNewIsDeterministic.SelectedValue;
 
-                int returnValue = dsVarieties.Insert();
+                    int returnValue = dsVarieties.Insert();
+                }
+                else
+                {
+                    dsVarieties.UpdateParameters["VarietyId"].DefaultValue = txtNewId.Value;
+                    dsVarieties.UpdateParameters["Name"].DefaultValue = txtNewName.Text;
+                    dsVarieties.UpdateParameters["Description"].DefaultValue = txtNewDescription.Text;
+                    dsVarieties.UpdateParameters["ColorId"].DefaultValue = cmbNewColor.SelectedValue;
+                    dsVarieties.UpdateParameters["SizeId"].DefaultValue = cmbNewSize.SelectedValue;
+                    dsVarieties.UpdateParameters["SubTypeId"].DefaultValue = cmbNewSubType.SelectedValue;
+                    dsVarieties.UpdateParameters["ClimateId"].DefaultValue = cmbNewClimate.SelectedValue;
+                    dsVarieties.UpdateParameters["MoistureId"].DefaultValue = cmbNewMoistureLevel.SelectedValue;
+                    dsVarieties.UpdateParameters["ContainerId"].DefaultValue = cmbNewContainer.SelectedValue;
+                    dsVarieties.UpdateParameters["HeatIndexId"].DefaultValue = cmbNewHeatIndex.SelectedValue;
+                    dsVarieties.UpdateParameters["IsDeterminate"].DefaultValue = cmbNewIsDeterministic.SelectedValue;
 
-                sManageVariety.Visible = true;
-                sNewVariety.Visible = false;
+                    int returnValue = dsVarieties.Update();
+                }
 
-                gvResults.DataBind();
+                    gvResults.DataBind();
             }
             catch (Exception)
             {

@@ -5,8 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>My Tomato Garden - Administration</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=false;" />
+    <meta http-equiv="content-type" content="text/html, charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=false" />
     <link rel="stylesheet" href="../styles/main.css" type="text/css" />
     <link rel="stylesheet" href="../styles/main_narrow.css" type="text/css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,6 +17,17 @@
 
         function init() {
             $('#menuIcon').click(toggleMenu);
+
+            //add select function to search results
+            $('#dSearchResults tr:not(:first)').click(function () {
+                selectRow($(this));
+            })
+            $('#dSearchResults tr:not(:first)').addClass('clickable');
+
+            //bind delete click event
+            $('*[id*=btnNewDelete]').click(confirmDelete);
+
+            $('#sDetail').hide();
         };
 
         function toggleMenu() {
@@ -27,6 +38,79 @@
                 $('nav').slideUp("medium");
                 $('nav').toggleClass('closed');
             }
+        };
+
+        function toggleId(selector) {
+            //if ($(selector).hasClass('closed')) {
+            //    $(selector).toggleClass('closed');
+            //    $(selector).slideDown("medium");
+            //} else {
+            //    $(selector).slideUp("medium");
+            //    $(selector).toggleClass('closed');
+            //}
+            $(selector).slideToggle("Medium");
+        };
+
+        function toggleHidden(selector) {
+            if ($(selector).hasClass('closed')) {
+                $(selector).toggleClass('closed');
+                $(selector).show();
+            } else {
+                $(selector).hide();
+                $(selector).toggleClass('closed');
+            }
+        };
+
+        function clearSearch() {
+            $('#dSearch input:text').val("");
+            $('#dSearch select').val("0");
+        };
+
+        function newItem(cancel) {
+            if (cancel) {
+                $('#sSearch').show();
+                $('#sSearchResults').show();
+                $('#sDetail').hide();
+
+                $('.rowSelected').each(function(){selectRow($(this));});
+            }
+            else {
+                $('#sSearch').hide();
+                $('#sSearchResults').hide();
+                $('#sDetail').show();
+                $('*[id*=btnNewDelete]').hide();
+
+                //reset items in detail
+                $('#sDetail input:text').val("");
+                $('#sDetail input:hidden').val("0");
+                $('#sDetail select').val("0");
+            }
+        };
+
+        function selectRow(element) {
+            //deselect all rows
+            $('#dSearchResults tr').each(function () {
+                $(this).removeClass('rowSelected');
+            });
+            //select this row
+            element.addClass('rowSelected');
+
+            //pass values for editing
+            editItem(element);
+
+            //show editing section
+            $('#sDetail').show();
+            $('*[id*=btnNewDelete]').show();
+
+            //hide search
+            $("#dSearch").slideUp("medium");
+        };
+
+        function selectComboValue(comboSelector, value) {
+            $(comboSelector + ' option').removeAttr('selected');
+            $(comboSelector + ' option').filter(function () {
+                return $(this).text() == value;
+            }).attr('selected', 'selected');
         };
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">

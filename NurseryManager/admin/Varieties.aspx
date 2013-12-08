@@ -1,6 +1,29 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" AutoEventWireup="true" CodeBehind="Varieties.aspx.cs" Inherits="NurseryManager.admin.Varieties" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/admin/admin.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Varieties.aspx.cs" Inherits="NurseryManager.admin.Varieties" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <script type="text/javascript">
+        function editItem(element) {
+            //pass values for editing
+            $('*[id*=txtNewId]').val(element.children()[0].innerHTML);
+            $('*[id*=txtNewName]').val(element.children()[1].innerHTML);
+            $('*[id*=txtNewDescription]').val(element.children()[2].innerHTML);
+            selectComboValue('*[id*=cmbNewColor]', element.children()[3].innerHTML);
+            selectComboValue('*[id*=cmbNewSize]', element.children()[4].innerHTML);
+            selectComboValue('*[id*=cmbNewSubType]', $.trim(element.children()[5].innerHTML));
+            selectComboValue('*[id*=cmbNewClimate]', element.children()[6].innerHTML);
+            selectComboValue('*[id*=cmbNewMoistureLevel]', element.children()[7].innerHTML);
+            selectComboValue('*[id*=cmbNewContainer]', element.children()[8].innerHTML);
+            selectComboValue('*[id*=cmbNewHeatIndex]', element.children()[9].innerHTML);
+            //selectComboValue('*[id*=cmbNewIsDeterminate]', element.children()[10].innerHTML);
+        }
+
+        function confirmDelete() {
+            if (!confirm("Are you sure you want to delete this record?"))
+                return false;
+
+            <%= Page.ClientScript.GetPostBackEventReference(new PostBackOptions(btnDelete))%>;
+        };
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cphMain" runat="server">
 
@@ -58,11 +81,11 @@
     <!-- End Data Sources ---------------------------------------------->
 
     <h1>Plant Varieties</h1>
-    <section id="sManageVariety" runat="server">
-        <h2>Manage Your Varieties</h2>
+    <section id="sSearch">
+        <h2 class="clickable" onclick="toggleId('#dSearch')">Search Query</h2>
         <div id="dSearch">
             <fieldset>
-                <legend>Search for Varieties</legend>
+                <legend>Search Properties</legend>
                 <div class="multi_col">
                     <div class="sub_col_left">
                         <asp:Label ID="Label1" runat="server" Text="Name:" AssociatedControlID="txtSearchName"></asp:Label>
@@ -119,14 +142,16 @@
                 </div>
                 <div class="dButtonRow">
                     <button id="btnSearch" runat="server" onserverclick="btnSearch_ServerClick">Search</button>
-                    <button id="btnClear" runat="server" onserverclick="btnClear_ServerClick">Clear</button>
-                    <button id="btnNew" class="left_align_button" runat="server" onserverclick="btnNew_ServerClick">New</button>
+                    <button id="btnClear" type="button" onclick="clearSearch()">Clear</button>
+                    <button id="btnNew" type="button" onclick="newItem(false)" class="left_align_button" >New</button>
                 </div>
             </fieldset>
         </div>
+    </section>
+    <section id="sSearchResults">
+        <h2 class="clickable" onclick="toggleId('#dSearchResults')">Search Results</h2>
         <div id="dSearchResults">
-            <asp:GridView ID="gvResults" runat="server" DataSourceID="dsVarieties" DataKeyNames="VarietyId" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" Width="100%" AllowSorting="True" ShowFooter="True" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical"
-                OnRowCommand="gvResults_RowCommand">
+            <asp:GridView ID="gvResults" runat="server" DataSourceID="dsVarieties" DataKeyNames="VarietyId" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" Width="100%" AllowSorting="True" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="VarietyId" HeaderText="VarietyId" SortExpression="VarietyId" ReadOnly="True" />
@@ -134,8 +159,11 @@
                     <asp:BoundField DataField="Description" HeaderText="Description" SortExpression="Description" />
                     <asp:BoundField DataField="Color" HeaderText="Color" SortExpression="Color" />
                     <asp:BoundField DataField="Size" HeaderText="Size" SortExpression="Size" />
-                    <asp:BoundField DataField="Type" HeaderText="Type" SortExpression="Type" />
-                    <asp:BoundField DataField="Subtype" HeaderText="Subtype" SortExpression="Subtype" />
+                    <asp:TemplateField HeaderText="Type/SubType">
+                        <ItemTemplate>
+                            <%#Eval("Type") + "/" + Eval("SubType")%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="Climate" HeaderText="Climate" SortExpression="Climate" />
                     <asp:BoundField DataField="MoistureLevel" HeaderText="MoistureLevel" SortExpression="MoistureLevel" />
                     <asp:BoundField DataField="Container" HeaderText="Container" SortExpression="Container" />
@@ -157,10 +185,11 @@
             </asp:GridView>
         </div>
     </section>
-    <section id="sNewVariety" runat="server" visible="false">
-        <h2>New Variety</h2>
+    <section id="sDetail">
+        <h2>Variety Information</h2>
         <fieldset>
             <legend>Variety Details</legend>
+            <input type="hidden" value="0" runat="server" id="txtNewId" />
             <div class="multi_col">
                 <div class="sub_col_left">
                     <asp:Label ID="Label10" runat="server" Text="Name:" AssociatedControlID="txtNewName"></asp:Label>
@@ -217,13 +246,18 @@
             </div>
             <div class="multi_col">
                 <div class="sub_col_left">
-                    <asp:Label ID="Label19" runat="server" Text="Deterministic:" AssociatedControlID="chkNewIsDeterministic"></asp:Label>
+                    <asp:Label ID="Label19" runat="server" Text="Deterministic:" AssociatedControlID="cmbNewIsDeterministic"></asp:Label>
                 </div>
-                <asp:CheckBox ID="chkNewIsDeterministic" runat="server" Checked="false" Text=""/>
+                <asp:DropDownList ID="cmbNewIsDeterministic" runat="server">
+                    <asp:ListItem Selected="True" Text="Yes" Value="true"></asp:ListItem>
+                    <asp:ListItem Text="No" Value="false"></asp:ListItem>
+                </asp:DropDownList>
             </div>
             <div class="dButtonRow">
-                <button id="btnNewCancel" runat="server" onserverclick="btnNewCancel_ServerClick">Cancel</button>
+                <button id="btnNewCancel" type="button" onclick="newItem(true)">Cancel</button>
                 <button id="btnNewUpdate" runat="server" onserverclick="btnNewUpdate_ServerClick">Update</button>
+                <button id="btnDelete" visible="false" runat="server" onserverclick="btnNewDelete_ServerClick" class="left_align_button">Delete</button>
+                <button id="btnNewDelete" visible="false" class="left_align_button">Delete</button>
             </div>
         </fieldset>
     </section>

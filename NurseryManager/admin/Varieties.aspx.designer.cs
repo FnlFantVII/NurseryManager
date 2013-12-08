@@ -94,15 +94,6 @@ namespace NurseryManager.admin {
         protected global::System.Web.UI.WebControls.SqlDataSource dsMoisture;
         
         /// <summary>
-        /// sManageVariety control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sManageVariety;
-        
-        /// <summary>
         /// Label1 control.
         /// </summary>
         /// <remarks>
@@ -274,24 +265,6 @@ namespace NurseryManager.admin {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnSearch;
         
         /// <summary>
-        /// btnClear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnClear;
-        
-        /// <summary>
-        /// btnNew control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnNew;
-        
-        /// <summary>
         /// gvResults control.
         /// </summary>
         /// <remarks>
@@ -301,13 +274,13 @@ namespace NurseryManager.admin {
         protected global::System.Web.UI.WebControls.GridView gvResults;
         
         /// <summary>
-        /// sNewVariety control.
+        /// txtNewId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sNewVariety;
+        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtNewId;
         
         /// <summary>
         /// Label10 control.
@@ -481,22 +454,13 @@ namespace NurseryManager.admin {
         protected global::System.Web.UI.WebControls.Label Label19;
         
         /// <summary>
-        /// chkNewIsDeterministic control.
+        /// cmbNewIsDeterministic control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkNewIsDeterministic;
-        
-        /// <summary>
-        /// btnNewCancel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnNewCancel;
+        protected global::System.Web.UI.WebControls.DropDownList cmbNewIsDeterministic;
         
         /// <summary>
         /// btnNewUpdate control.
@@ -506,5 +470,14 @@ namespace NurseryManager.admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton btnNewUpdate;
+        
+        /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnDelete;
     }
 }
