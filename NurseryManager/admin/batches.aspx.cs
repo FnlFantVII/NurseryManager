@@ -21,53 +21,52 @@ namespace NurseryManager.admin
             gvResults.DataBind();
         }
 
-        protected void btnSearch_ServerClick(object sender, EventArgs e)
+        protected void btnNewDelete_ServerClick(object sender, EventArgs e)
         {
+            SqlDataSource1.DeleteParameters["BatchId"].DefaultValue = txtNewBatchId.Value;
+            SqlDataSource1.Delete();
+            gvResults.DataBind();
         }
 
-        private void RefreshResults()
+        protected void btnNewUpdate_ServerClick(object sender, EventArgs e)
         {
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["SqlAzure"].ConnectionString))
+            try
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = con;
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "sp_SearchForBatches";
-                cmd.Parameters.Add(new SqlParameter("@Name", txtSearchName.Value));
-                cmd.Parameters.Add(new SqlParameter("@StartDate", txtSearchStart.Value));
-                cmd.Parameters.Add(new SqlParameter("@EndDate", txtSearchEnd.Value));
+                if (txtNewBatchId.Value == "0")
+                {
+                    SqlDataSource1.InsertParameters["Name"].DefaultValue = txtNewBatchName.Value;
+                    SqlDataSource1.InsertParameters["BatchLimit"].DefaultValue = txtNewBatchLimit.Value;
+                    SqlDataSource1.InsertParameters["StartDate"].DefaultValue = txtNewBatchStart.Value;
+                    SqlDataSource1.InsertParameters["OrderDeadline"].DefaultValue = txtNewBatchDeadline.Value;
+                    SqlDataSource1.InsertParameters["PickupDate"].DefaultValue = txtNewBatchPickup.Value;
+                    SqlDataSource1.InsertParameters["PickupEndDate"].DefaultValue = txtNewBatchPickupEnd.Value;
 
-                SqlDataReader reader = cmd.ExecuteReader();
-                DataTable dt = new DataTable();
-                dt.Load(reader);
-                gvResults.DataSource = dt;
+                    int returnValue = SqlDataSource1.Insert();
+                }
+                else
+                {
+                    SqlDataSource1.UpdateParameters["BatchId"].DefaultValue = txtNewBatchId.Value;
+                    SqlDataSource1.UpdateParameters["Name"].DefaultValue = txtNewBatchName.Value;
+                    SqlDataSource1.UpdateParameters["BatchLimit"].DefaultValue = txtNewBatchLimit.Value;
+                    SqlDataSource1.UpdateParameters["StartDate"].DefaultValue = txtNewBatchStart.Value;
+                    SqlDataSource1.UpdateParameters["OrderDeadline"].DefaultValue = txtNewBatchDeadline.Value;
+                    SqlDataSource1.UpdateParameters["PickupDate"].DefaultValue = txtNewBatchPickup.Value;
+                    SqlDataSource1.UpdateParameters["PickupEndDate"].DefaultValue = txtNewBatchPickupEnd.Value;
+
+                    int returnValue = SqlDataSource1.Update();
+                }
+
                 gvResults.DataBind();
             }
-        }
-
-        protected void gvResults_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            //SqlDataSource1.UpdateParameters[
-                /*
-                 * <asp:Parameter Name="BatchId" Type="Int32" />
-            <asp:Parameter Name="Name" Type="String" />
-            <asp:Parameter Name="BatchLimit" Type="Int32" />
-            <asp:Parameter Name="StartDate" Type="DateTime" />
-            <asp:Parameter Name="OrderDeadline" Type="DateTime" />
-            <asp:Parameter Name="PickupDate" Type="DateTime" />
-            <asp:Parameter Name="PickupEndDate" Type="DateTime" />
-                 * */
-        }
-
-        protected void gvResults_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "Insert")
+            catch (Exception)
             {
-                foreach (var item in gvResults.Columns)
-                {
-                }
+
+                throw;
             }
+        }
+
+        protected void btnSearch_ServerClick(object sender, EventArgs e)
+        {
         }
     }
 }

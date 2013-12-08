@@ -12,7 +12,6 @@ namespace NurseryManager
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((HtmlGenericControl)Master.FindControl("menuHome")).Attributes.Add("Class", "current_page_item");
         }
     }
 }

@@ -91,6 +91,25 @@
             color: #eee;
         }
 
+    #loginContainer {
+        width: 98%;
+    }
+
+    .login_col input:not([type="checkbox"]) {
+        margin-right: initial;
+        width: 100%;
+        display: block;
+        height: 2em;
+        font-size: 1.5em;
+        border-radius: 5px;
+    }
+
+    #lblFailureText {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        display: block;
+    }
+
     nav {
         position: relative;
         font-family: 'Open Sans Condensed', sans-serif;
@@ -105,7 +124,6 @@
             list-style: none;
             overflow: hidden;
             margin: 0px;
-            padding-start: 0em;
             -webkit-padding-start: 0em;
             -moz-padding-start: 0em;
             -ms-padding-start: 0em;
@@ -226,7 +244,7 @@
             float: right;
             margin: 0px;
             width: 50%;
-            font-size:2em;
+            font-size: 2em;
             height: 2em;
         }
 
@@ -242,28 +260,28 @@
         height: initial;
     }
 
-        .multi_col input, select {
+        .multi_col input:not([type="checkbox"]), .multi_col select {
             margin-right: initial;
             width: 100%;
-            height:2em;
-            font-size:1.5em;
-            border-radius:5px;
+            height: 2em;
+            font-size: 1.5em;
+            border-radius: 5px;
         }
 
     .sub_col_left {
         float: initial;
-        margin-top:5px;
-        width:100%;
+        margin-top: 5px;
+        width: 100%;
     }
 
-        .sub_col_left label, span {
+        .sub_col_left label, .sub_col_left span {
             float: initial;
             margin: 0px;
-            margin-top:5px;
-            font-size:1.5em;
+            margin-top: 5px;
+            font-size: 1.5em;
         }
 
     .clickable {
-        cursor:pointer;
+        cursor: pointer;
     }
 }

@@ -15,14 +15,14 @@ namespace NurseryManager.admin
         protected void Page_Load(object sender, EventArgs e)
         {
             dsVarieties.SelectParameters["Name"].DefaultValue = txtSearchName.Text;
-            dsVarieties.SelectParameters["ColorId"].DefaultValue = cmbColor.SelectedValue;
-            dsVarieties.SelectParameters["SizeId"].DefaultValue = cmbSize.SelectedValue;
-            dsVarieties.SelectParameters["TypeId"].DefaultValue = cmbType.SelectedValue;
-            dsVarieties.SelectParameters["SubTypeId"].DefaultValue = cmbSubType.SelectedValue;
-            dsVarieties.SelectParameters["ClimateId"].DefaultValue = cmbClimate.SelectedValue;
-            dsVarieties.SelectParameters["MoistureId"].DefaultValue = cmbMoistureLevel.SelectedValue;
-            dsVarieties.SelectParameters["ContainerId"].DefaultValue = cmbContainer.SelectedValue;
-            dsVarieties.SelectParameters["HeatIndexId"].DefaultValue = cmbHeatIndex.SelectedValue;
+            dsVarieties.SelectParameters["ColorId"].DefaultValue = string.IsNullOrEmpty(cmbColor.SelectedValue) ? "0" : cmbColor.SelectedValue;
+            dsVarieties.SelectParameters["SizeId"].DefaultValue = string.IsNullOrEmpty(cmbSize.SelectedValue) ? "0" : cmbSize.SelectedValue;
+            dsVarieties.SelectParameters["TypeId"].DefaultValue = string.IsNullOrEmpty(cmbType.SelectedValue) ? "0" : cmbType.SelectedValue;
+            dsVarieties.SelectParameters["SubTypeId"].DefaultValue = string.IsNullOrEmpty(cmbSubType.SelectedValue) ? "0" : cmbSubType.SelectedValue;
+            dsVarieties.SelectParameters["ClimateId"].DefaultValue = string.IsNullOrEmpty(cmbClimate.SelectedValue) ? "0" : cmbClimate.SelectedValue;
+            dsVarieties.SelectParameters["MoistureId"].DefaultValue = string.IsNullOrEmpty(cmbMoistureLevel.SelectedValue) ? "0" : cmbMoistureLevel.SelectedValue;
+            dsVarieties.SelectParameters["ContainerId"].DefaultValue = string.IsNullOrEmpty(cmbContainer.SelectedValue) ? "0" : cmbContainer.SelectedValue;
+            dsVarieties.SelectParameters["HeatIndexId"].DefaultValue = string.IsNullOrEmpty(cmbHeatIndex.SelectedValue) ? "0" : cmbHeatIndex.SelectedValue;
             //var items = dsVarieties.Select(new DataSourceSelectArguments());
             gvResults.DataBind();
         }
@@ -49,7 +49,7 @@ namespace NurseryManager.admin
                     dsVarieties.InsertParameters["MoistureId"].DefaultValue = cmbNewMoistureLevel.SelectedValue;
                     dsVarieties.InsertParameters["ContainerId"].DefaultValue = cmbNewContainer.SelectedValue;
                     dsVarieties.InsertParameters["HeatIndexId"].DefaultValue = cmbNewHeatIndex.SelectedValue;
-                    dsVarieties.InsertParameters["IsDeterminate"].DefaultValue = cmbNewIsDeterministic.SelectedValue;
+                    dsVarieties.InsertParameters["IsDeterminate"].DefaultValue = cmbNewIsDeterminate.SelectedValue;
 
                     int returnValue = dsVarieties.Insert();
                 }
@@ -65,7 +65,7 @@ namespace NurseryManager.admin
                     dsVarieties.UpdateParameters["MoistureId"].DefaultValue = cmbNewMoistureLevel.SelectedValue;
                     dsVarieties.UpdateParameters["ContainerId"].DefaultValue = cmbNewContainer.SelectedValue;
                     dsVarieties.UpdateParameters["HeatIndexId"].DefaultValue = cmbNewHeatIndex.SelectedValue;
-                    dsVarieties.UpdateParameters["IsDeterminate"].DefaultValue = cmbNewIsDeterministic.SelectedValue;
+                    dsVarieties.UpdateParameters["IsDeterminate"].DefaultValue = cmbNewIsDeterminate.SelectedValue;
 
                     int returnValue = dsVarieties.Update();
                 }

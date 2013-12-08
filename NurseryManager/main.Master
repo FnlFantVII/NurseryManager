@@ -16,17 +16,26 @@
         $(init);
 
         function init() {
+            setNavigation();
+
             $('#menuIcon').click(toggleMenu);
         };
 
+        function setNavigation() {
+            var path = window.location.pathname;
+            path = path.replace(/\/$/, "");
+            path = decodeURIComponent(path);
+
+            $("nav a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('current_page_item');
+                }
+            });
+        }
+
         function toggleMenu() {
-            if ($('nav').hasClass('closed')) {
-                $('nav').toggleClass('closed');
-                $('nav').slideDown("medium");
-            } else {
-                $('nav').slideUp("medium");
-                $('nav').toggleClass('closed');
-            }
+            $('nav').slideToggle('Medium');
         };
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -45,12 +54,12 @@
                 <img src="images/logo.jpg" />
                 <nav>
                     <ul>
-                        <li id="menuHome" runat="server"><a href="default.aspx">Home</a></li>
-                        <li id="menuVarieties" runat="server"><a href="varieties.aspx">Varieties</a></li>
-                        <li id="menuRecipes" runat="server"><a href="recipes.aspx">Recipes</a></li>
-                        <li id="menuAboutUs" runat="server"><a href="aboutUs.aspx">About Us</a></li>
-                        <li id="menuMyGarden" runat="server" visible="false"><a href="members/myGarden.aspx">My Garden</a></li>
-                        <li id="menuAdmin" runat="server" visible="false"><a href="admin/batches.aspx">Admin</a></li>
+                        <li id="menuHome" runat="server"><a href="/default.aspx">Home</a></li>
+                        <li id="menuVarieties" runat="server"><a href="/varieties.aspx">Varieties</a></li>
+                        <li id="menuRecipes" runat="server"><a href="/recipes.aspx">Recipes</a></li>
+                        <li id="menuAboutUs" runat="server"><a href="/aboutUs.aspx">About Us</a></li>
+                        <li id="menuMyGarden" runat="server" visible="false"><a href="/members/myGarden.aspx">My Garden</a></li>
+                        <li id="menuAdmin" runat="server" visible="false"><a href="/admin/batches.aspx">Admin</a></li>
                     </ul>
                 </nav>
             </header>
@@ -70,20 +79,33 @@
                     <section>
                         <h2>Login</h2>
                         <div id="loginContainer" runat="server">
-                            <label>User Name:</label>
-                            <div class="block">
-                                <input type="text" id="UserName" runat="server" />
+                            <div class="login_col">
+                                <div class="sub_col_left">
+                                    <label>User Name:</label>
+                                </div>
+                                <div>
+                                    <input type="text" id="UserName" runat="server" />
+                                </div>
+
+                                <div class="sub_col_left">
+                                    <label>Password:</label>
+                                </div>
+
+                                <div>
+                                    <input type="password" id="Password" runat="server" />
+                                </div>
+
+                                <div>
+                                    <div id="loginCenter">
+                                        <input type="checkbox" id="RememberMe" runat="server" value="Remember Me" />
+                                        <label for="RememberMe">Remember Me</label>
+                                        <label id="lblFailureText" runat="server"></label>
+                                    </div>
+                                    <input type="submit" id="btnLogin" runat="server" value="Log In" onserverclick="LoginUser" />
+                                </div>
+
                             </div>
-                            <label>Password:</label>
-                            <div class="block">
-                                <input type="password" id="Password" runat="server" />
-                            </div>
-                            <div class="block">
-                                <input type="checkbox" id="RememberMe" runat="server" />
-                                Remember Me.
-                            </div>
-                            <label id="lblFailureText" runat="server"></label>
-                            <input type="submit" id="btnLogin" runat="server" value="Log In" onserverclick="LoginUser" />
+
                         </div>
                     </section>
                 </div>

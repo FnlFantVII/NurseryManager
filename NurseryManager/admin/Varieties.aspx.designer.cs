@@ -454,13 +454,13 @@ namespace NurseryManager.admin {
         protected global::System.Web.UI.WebControls.Label Label19;
         
         /// <summary>
-        /// cmbNewIsDeterministic control.
+        /// cmbNewIsDeterminate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList cmbNewIsDeterministic;
+        protected global::System.Web.UI.WebControls.DropDownList cmbNewIsDeterminate;
         
         /// <summary>
         /// btnNewUpdate control.

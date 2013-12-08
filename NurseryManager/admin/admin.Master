@@ -16,13 +16,25 @@
         $(init);
 
         function init() {
+            //Set the current page
+            setNavigation();
+
             $('#menuIcon').click(toggleMenu);
 
             //add select function to search results
-            $('#dSearchResults tr:not(:first)').click(function () {
+            $('#dSearchResults tr:not(:first-child, :last-child)').click(function () {
                 selectRow($(this));
-            })
-            $('#dSearchResults tr:not(:first)').addClass('clickable');
+            });
+            $('#dSearchResults tr:not(:first-child, :last-child)').addClass('clickable');
+
+            //add last child only if not a pager row
+            if ($('#dSearchResults tr:last-child').first().children().length > 1) {
+                $('#dSearchResults tr:last-child').first().click(function () {
+                    selectRow($(this));
+                });
+
+                $('#dSearchResults tr:last-child').addClass('clickable');
+            }
 
             //bind delete click event
             $('*[id*=btnNewDelete]').click(confirmDelete);
@@ -30,24 +42,24 @@
             $('#sDetail').hide();
         };
 
+        function setNavigation() {
+            var path = window.location.pathname;
+            path = path.replace(/\/$/, "");
+            path = decodeURIComponent(path);
+
+            $("nav a").each(function () {
+                var href = $(this).attr('href');
+                if (path.substring(0, href.length) === href) {
+                    $(this).closest('li').addClass('current_page_item');
+                }
+            });
+        }
+
         function toggleMenu() {
-            if ($('nav').hasClass('closed')) {
-                $('nav').toggleClass('closed');
-                $('nav').slideDown("medium");
-            } else {
-                $('nav').slideUp("medium");
-                $('nav').toggleClass('closed');
-            }
+            $('nav').slideToggle("Medium");
         };
 
         function toggleId(selector) {
-            //if ($(selector).hasClass('closed')) {
-            //    $(selector).toggleClass('closed');
-            //    $(selector).slideDown("medium");
-            //} else {
-            //    $(selector).slideUp("medium");
-            //    $(selector).toggleClass('closed');
-            //}
             $(selector).slideToggle("Medium");
         };
 
@@ -62,7 +74,7 @@
         };
 
         function clearSearch() {
-            $('#dSearch input:text').val("");
+            $('#dSearch input').val("");
             $('#dSearch select').val("0");
         };
 
@@ -94,23 +106,26 @@
             });
             //select this row
             element.addClass('rowSelected');
-
-            //pass values for editing
-            editItem(element);
-
+            
             //show editing section
             $('#sDetail').show();
             $('*[id*=btnNewDelete]').show();
 
             //hide search
             $("#dSearch").slideUp("medium");
+
+            //pass values for editing
+            editItem(element);
         };
 
         function selectComboValue(comboSelector, value) {
-            $(comboSelector + ' option').removeAttr('selected');
+            $(comboSelector + ' option').removeProp('selected');
             $(comboSelector + ' option').filter(function () {
-                return $(this).text() == value;
-            }).attr('selected', 'selected');
+                if ($(this).text() == value) {
+                    $(this).prop('selected', 'selected');
+                    $(this).attr('selected', 'selected');
+                };
+            });
         };
     </script>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -129,11 +144,11 @@
                 <img src="../images/logo.jpg" />
                 <nav>
                     <ul>
-                        <li><a href="../default.aspx">Home</a></li>
-                        <li><a href="batches.aspx">Batches</a></li>
-                        <li><a href="varieties.aspx">Varieties</a></li>
-                        <li><a href="orders.aspx">Orders</a></li>
-                        <li><a href="customers.aspx">Customers</a></li>
+                        <li><a href="/default.aspx">Home</a></li>
+                        <li><a href="/admin/batches.aspx">Batches</a></li>
+                        <li><a href="/admin/varieties.aspx">Varieties</a></li>
+                        <li><a href="/admin/orders.aspx">Orders</a></li>
+                        <li><a href="/admin/customers.aspx">Customers</a></li>
                     </ul>
                 </nav>
             </header>

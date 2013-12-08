@@ -12,7 +12,6 @@ namespace NurseryManager.content
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ((HtmlGenericControl)Master.FindControl("menuVarieties")).Attributes.Add("Class", "current_page_item");
         }
     }
 }

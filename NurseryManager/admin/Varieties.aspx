@@ -14,7 +14,11 @@
             selectComboValue('*[id*=cmbNewMoistureLevel]', element.children()[7].innerHTML);
             selectComboValue('*[id*=cmbNewContainer]', element.children()[8].innerHTML);
             selectComboValue('*[id*=cmbNewHeatIndex]', element.children()[9].innerHTML);
-            //selectComboValue('*[id*=cmbNewIsDeterminate]', element.children()[10].innerHTML);
+            if (element.children().eq(10).find(':checkbox').attr('checked') == 'checked')
+                selectComboValue('*[id*=cmbNewIsDeterminate]', 'Yes');
+            else
+                selectComboValue('*[id*=cmbNewIsDeterminate]', 'No');
+
         }
 
         function confirmDelete() {
@@ -140,18 +144,21 @@
                     </div>
                     <asp:DropDownList ID="cmbHeatIndex" DataSourceID="dsHeatIndex" DataValueField="HeatIndexId" DataTextField="HeatIndex" runat="server"></asp:DropDownList>
                 </div>
-                <div class="dButtonRow">
-                    <button id="btnSearch" runat="server" onserverclick="btnSearch_ServerClick">Search</button>
-                    <button id="btnClear" type="button" onclick="clearSearch()">Clear</button>
-                    <button id="btnNew" type="button" onclick="newItem(false)" class="left_align_button" >New</button>
-                </div>
             </fieldset>
+        </div>
+        <div class="inline">
+            <div class="dButtonRow">
+                <button id="btnSearch" runat="server" onserverclick="btnSearch_ServerClick">Search</button>
+                <button id="btnClear" type="button" onclick="clearSearch()">Clear</button>
+            </div>
         </div>
     </section>
     <section id="sSearchResults">
         <h2 class="clickable" onclick="toggleId('#dSearchResults')">Search Results</h2>
         <div id="dSearchResults">
-            <asp:GridView ID="gvResults" runat="server" DataSourceID="dsVarieties" DataKeyNames="VarietyId" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" Width="100%" AllowSorting="True" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
+            <asp:GridView ID="gvResults" runat="server" PageSize="10" AllowPaging="true" PagerStyle-HorizontalAlign="Left" PagerStyle-CssClass="pagerStyleLeft"
+                 DataSourceID="dsVarieties" DataKeyNames="VarietyId" ShowHeaderWhenEmpty="True" AutoGenerateColumns="False" Width="100%" AllowSorting="True"
+                 BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="VarietyId" HeaderText="VarietyId" SortExpression="VarietyId" ReadOnly="True" />
@@ -183,6 +190,11 @@
                 <SortedDescendingCellStyle BackColor="#EAEAD3" />
                 <SortedDescendingHeaderStyle BackColor="#575357" />
             </asp:GridView>
+        </div>
+        <div class="inline">
+            <div class="dButtonRow">
+                <button id="btnNew" type="button" onclick="newItem(false)" class="left_align_button">New</button>
+            </div>
         </div>
     </section>
     <section id="sDetail">
@@ -246,9 +258,9 @@
             </div>
             <div class="multi_col">
                 <div class="sub_col_left">
-                    <asp:Label ID="Label19" runat="server" Text="Deterministic:" AssociatedControlID="cmbNewIsDeterministic"></asp:Label>
+                    <asp:Label ID="Label19" runat="server" Text="Determinate:" AssociatedControlID="cmbNewIsDeterminate"></asp:Label>
                 </div>
-                <asp:DropDownList ID="cmbNewIsDeterministic" runat="server">
+                <asp:DropDownList ID="cmbNewIsDeterminate" runat="server">
                     <asp:ListItem Selected="True" Text="Yes" Value="true"></asp:ListItem>
                     <asp:ListItem Text="No" Value="false"></asp:ListItem>
                 </asp:DropDownList>
