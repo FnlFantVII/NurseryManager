@@ -40,6 +40,9 @@
             $('*[id*=btnNewDelete]').click(confirmDelete);
 
             $('#sDetail').hide();
+
+            if ($.isFunction(subInit))
+                subInit();
         };
 
         function setNavigation() {
@@ -119,11 +122,12 @@
         };
 
         function selectComboValue(comboSelector, value) {
+            $(comboSelector + ' option').removeAttr('selected');
             $(comboSelector + ' option').removeProp('selected');
             $(comboSelector + ' option').filter(function () {
                 if ($(this).text() == value) {
-                    $(this).prop('selected', 'selected');
                     $(this).attr('selected', 'selected');
+                    $(this).prop('selected', 'selected');
                 };
             });
         };
